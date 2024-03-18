@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Password</title>
+    <style>
+/* Reset some styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+#passwords-container {
+  margin-bottom: 20px;
+}
+
+.password {
+  margin: 10px 0;
+  padding: 20px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.password:hover {
+  transform: translateY(-5px);
+}
+
+.strength-weak {
+  background: linear-gradient(145deg, #f44336, #ff665e);
+}
+
+.strength-medium {
+  background: linear-gradient(145deg, #ff9800, #ffad40);
+}
+
+.strength-strong {
+  background: linear-gradient(145deg, #4CAF50, #67c967);
+}
+
+.strength-very-strong {
+  background: linear-gradient(145deg, #2196F3, #3ba9f5);
+}
+
+.generate-button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background-color: #008CBA;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.generate-button:hover {
+  background-color: #007ba7;
+  box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+}
+
+    </style>
+</head>
+<body>
+    <div id="passwords">
+      <p class="password strength-weak">Weak: <%= @passwords[:weak] %></p>
+      <p class="password strength-medium">Medium: <%= @passwords[:medium] %></p>
+      <p class="password strength-strong">Strong: <%= @passwords[:strong] %></p>
+      <p class="password strength-very-strong">Very Strong: <%= @passwords[:very_strong] %></p>
+    </div>
+
+    <%= button_to "Generate Passwords", root_path, method: :get, class: "generate-button", remote: true %>
+</body>
+</html>

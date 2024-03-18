@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Password Strength Visualization</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
+</head>
+<body>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;500;700&family=Pacifico&display=swap');
+
+
+:root {
+    --weak-color: #e74c3c;
+    --medium-color: #f1c40f;
+    --strong-color: #2ecc71;
+    --very-strong-color: #3498db;
+}
+
+
+
+body {
+    background-color: #000; /* خلفية داكنة */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: white;
+    font-family: 'Julius Sans One', sans-serif;}
+
+h1 {
+    font-family: 'Julius Sans One', sans-serif;
+    }
+
+.neon-text {
+    font-family: 'Julius Sans One', sans-serif;
+    color: #8cfffb;
+    font-size: 3rem;
+    text-align: center;
+    text-shadow: 0 0 8px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff, 0 0 50px #00ffff, 0 0 60px #00ffff, 0 0 70px #00ffff;
+}
+
+.container {
+    text-align: center;
+}
+
+.password-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid white;
+    font-family: 'Julius Sans One', sans-serif;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.strength-meter {
+    height: 0.4px;
+    background-color: #555;
+    border-radius: 0.1px;
+    overflow: hidden;
+    position: relative;
+}
+
+.strength-indicators {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.indicator {
+    width: 25%;
+    height: 10px;
+    border-radius: 5px;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.password-hint {
+    margin-top: 20px;
+    color: #bbb;
+    font-size: 14px;
+    font-family: 'Julius Sans One', sans-serif;
+}
+
+/* Dynamic classes added via JS */
+.weak { background-color: var(--weak-color); }
+.medium { background-color: var(--medium-color); }
+.strong { background-color: var(--strong-color); }
+.very-strong { background-color: var(--very-strong-color); }
+
+.password-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.password-input {
+    width: calc(100% - 40px); /* Adjust based on the button width */
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid white;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border: none;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+}
+
+</style>
+
+<div class="container">
+    <h1 class="neon-text">Advanced Password Strength</h1>
+    <input type="password" id="passwordInput" placeholder="Enter your password" class="password-input">
+    <div class="strength-meter" id="strengthMeter"></div>
+    <div class="strength-indicators">
+        <div class="indicator weak"></div>
+        <div class="indicator medium"></div>
+        <div class="indicator strong"></div>
+        <div class="indicator very-strong"></div>
+        
+    </div>
+    <p id="passwordHint" class="password-hint">Start typing to check the password strength</p>
+</div>
+
+<script>
+const passwordInput = document.getElementById('passwordInput');
+const strengthMeter = document.getElementById('strengthMeter');
+const passwordHint = document.getElementById('passwordHint');
+const indicators = document.querySelectorAll('.indicator');
+
+
+
+passwordInput.addEventListener('input', () => {
+    const strengths = ['weak', 'medium', 'strong', 'very-strong'];
+    const strength = getPasswordStrength(passwordInput.value);
+    indicators.forEach((ind, idx) => {
+        if (idx < strength) {
+            ind.classList.add(strengths[strength - 1]);
+        } else {
+            ind.classList.remove(...strengths);
+        }
+    });
+    passwordHint.textContent = strength > 0 ? `${strengths[strength - 1]}` : 'Start typing to check the password strength';
+});
+
+function getPasswordStrength(password) {
+    let strength = 0;
+    if (password.match(/[a-zA-Z]+/)) strength++;
+    if (password.match(/[0-9]+/)) strength++;
+    if (password.match(/[@$!%*#?&]+/)) strength++;
+    if (password.length >= 8) strength++;
+    return strength;
+}
+
+</script>
+
+</body>
+</html>

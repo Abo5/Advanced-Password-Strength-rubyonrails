@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Password Strength Visualization</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<style>
+:root {
+    --weak-color: #e74c3c;
+    --medium-color: #f1c40f;
+    --strong-color: #2ecc71;
+    --very-strong-color: #3498db;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    background-color: #333;
+    color: white;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+}
+
+.password-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid white;
+}
+
+.strength-meter {
+    height: 10px;
+    background-color: #555;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.strength-indicators {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.indicator {
+    width: 25%;
+    height: 10px;
+    border-radius: 5px;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.password-hint {
+    margin-top: 20px;
+    color: #bbb;
+    font-size: 14px;
+}
+
+/* Dynamic classes added via JS */
+.weak { background-color: var(--weak-color); }
+.medium { background-color: var(--medium-color); }
+.strong { background-color: var(--strong-color); }
+.very-strong { background-color: var(--very-strong-color); }
+
+</style>
+
+<div class="container">
+<h1 class="neon-text">Advanced Password Strength</h1>
+    <input type="password" id="passwordInput" placeholder="Enter your password" class="password-input">
+    <div class="strength-meter" id="strengthMeter"></div>
+    <div class="strength-indicators">
+        <div class="indicator weak"></div>
+        <div class="indicator medium"></div>
+        <div class="indicator strong"></div>
+        <div class="indicator very-strong"></div>
+    </div>
+    <p id="passwordHint" class="password-hint">Start typing to check the password strength</p>
+</div>
+
+<script>
+const passwordInput = document.getElementById('passwordInput');
+const strengthMeter = document.getElementById('strengthMeter');
+const passwordHint = document.getElementById('passwordHint');
+const indicators = document.querySelectorAll('.indicator');
+
+passwordInput.addEventListener('input', () => {
+    const strengths = ['weak', 'medium', 'strong', 'very-strong'];
+    const strength = getPasswordStrength(passwordInput.value);
+    indicators.forEach((ind, idx) => {
+        if (idx < strength) {
+            ind.classList.add(strengths[strength - 1]);
+        } else {
+            ind.classList.remove(...strengths);
+        }
+    });
+    passwordHint.textContent = strength > 0 ? `Strength: ${strengths[strength - 1]}` : 'Start typing to check the password strength';
+});
+
+function getPasswordStrength(password) {
+    let strength = 0;
+    if (password.match(/[a-zA-Z]+/)) strength++;
+    if (password.match(/[0-9]+/)) strength++;
+    if (password.match(/[@$!%*#?&]+/)) strength++;
+    if (password.length >= 8) strength++;
+    return strength;
+}
+
+</script>
+
+</body>
+</html>

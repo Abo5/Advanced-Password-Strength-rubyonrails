@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Display</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #101010;
+            font-family: 'Roboto Mono', monospace;
+            color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .title {
+            margin-bottom: 2rem;
+            color: #00ffea;
+            font-size: 1.5rem;
+        }
+
+        .password-display {
+            margin: 10px 0;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .strength-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .weak { background-color: #ff4747; }
+        .medium { background-color: #ffc107; }
+        .strong { background-color: #29b600; }
+        .very-strong { background-color: #00ffea; }
+
+        .password-value {
+            font-size: 1rem;
+            color: #ffffff;
+        }
+
+        .generate-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: 2px solid #00ffea;
+            background: transparent;
+            color: #00ffea;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            font-size: 1rem;
+        }
+
+        .generate-button:hover {
+            background-color: #00ffea;
+            color: #101010;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="title">Generate a Secure Password</div>
+    <div class="passwords-section">
+        <div class="password-display">
+            <div class="strength-indicator weak"></div>
+            <span class="password-value">Weak: <span id="passwordWeak"><%= @passwords[:weak] %></span></span>
+        </div>
+        <div class="password-display">
+            <div class="strength-indicator medium"></div>
+            <span class="password-value">Medium: <span id="passwordMedium"><%= @passwords[:medium] %></span></span>
+        </div>
+        <div class="password-display">
+            <div class="strength-indicator strong"></div>
+            <span class="password-value">Strong: <span id="passwordStrong"><%= @passwords[:strong] %></span></span>
+        </div>
+        <div class="password-display">
+            <div class="strength-indicator very-strong"></div>
+            <span class="password-value">Very Strong: <span id="passwordVeryStrong"><%= @passwords[:very_strong] %></span></span>
+        </div>
+    </div>
+    
+    <%= button_to "Generate Passwords", root_path, method: :get, class: "generate-button", remote: true %>
+</div>
+
+</body>
+</html>

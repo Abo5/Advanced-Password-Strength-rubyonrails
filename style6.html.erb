@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Display</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+body {
+    margin: 0;
+    padding: 0;
+    background: #283048; /* Dark gradient background */
+    font-family: 'Roboto Mono', monospace;
+    color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.container {
+    padding: 20px;
+    background: #404b69; /* Subtle background for the container */
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 450px;
+}
+
+.title {
+    color: #FFD700; /* Golden text for a bit of flair */
+    margin-bottom: 30px;
+}
+
+.password-display {
+    background: #283048;
+    color: #FFFFFF;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.password-display:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.strength-indicator {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.weak { background-color: #E57373; }
+.medium { background-color: #FFEB3B; }
+.strong { background-color: #81C784; }
+.very-strong { background-color: #64B5F6; }
+
+.password-value {
+    font-weight: 700;
+}
+
+.generate-button {
+    padding: 10px 20px;
+    background-color: #FFC107; /* A bright, inviting button */
+    color: #283048;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+}
+
+.generate-button:hover {
+    background-color: #FFD54F;
+    transform: scale(1.05);
+}
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="title">Generate a Secure Password</div>
+    <div class="passwords-section">
+        <div class="password-display">
+            <div class="strength-indicator weak"></div>
+            <span class="password-value">Weak</span>
+        </div>
+        <div class="password-display">
+            <div class="strength-indicator medium"></div>
+            <span class="password-value">Medium</span>
+        </div>
+        <div class="password-display">
+            <div class="strength-indicator strong"></div>
+            <span class="password-value">Strong</span>
+        </div>
+        <div class="password-display">
+            <div class="strength-indicator very-strong"></div>
+            <span class="password-value">Very Strong</span>
+        </div>
+    </div>
+    
+    <button class="generate-button">Generate Passwords</button>
+</div>
+
+</body>
+</html>

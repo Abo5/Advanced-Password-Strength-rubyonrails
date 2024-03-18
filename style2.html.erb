@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Password</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  font-family: 'Orbitron', sans-serif;
+  color: #fff;
+  overflow: hidden;
+}
+
+.futuristic-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.passwords-section {
+  margin-bottom: 30px;
+}
+
+.password-display {
+  margin: 10px 0;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  position: relative;
+}
+
+.password-display::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 2s infinite;
+}
+
+.password-value {
+  font-size: 20px;
+}
+
+.generate-button {
+  padding: 10px 20px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease;
+}
+
+.generate-button:hover {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: -100%; }
+}
+    </style>
+</head>
+<body>
+    <div class="futuristic-container">
+      <div class="passwords-section">
+        <div class="password-display strength-weak">Weak: <span class="password-value"><%= @passwords[:weak] %></span></div>
+        <div class="password-display strength-medium">Medium: <span class="password-value"><%= @passwords[:medium] %></span></div>
+        <div class="password-display strength-strong">Strong: <span class="password-value"><%= @passwords[:strong] %></span></div>
+        <div class="password-display strength-very-strong">Very Strong: <span class="password-value"><%= @passwords[:very_strong] %></span></div>
+      </div>
+      <%= button_to "Generate Passwords", root_path, method: :get, class: "generate-button", remote: true %>
+    </div>
+</body>
+</html>

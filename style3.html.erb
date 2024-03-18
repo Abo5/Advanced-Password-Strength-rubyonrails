@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Password</title>
+    <style>
+        /* app/assets/stylesheets/passwords.css */
+        #passwords {
+          font-family: 'Arial', sans-serif;
+          margin-bottom: 20px;
+        }
+
+        .password {
+          margin: 10px 0;
+          padding: 10px;
+          border-radius: 5px;
+          color: #fff;
+          font-weight: bold;
+        }
+
+        .strength-weak {
+          background-color: #f44336; /* Red */
+        }
+
+        .strength-medium {
+          background-color: #ff9800; /* Orange */
+        }
+
+        .strength-strong {
+          background-color: #4CAF50; /* Green */
+        }
+
+        .strength-very-strong {
+          background-color: #2196F3; /* Blue */
+        }
+
+        .generate-button {
+          font-family: 'Arial', sans-serif;
+          padding: 10px 20px;
+          background-color: #008CBA; /* Button Color */
+          color: white;
+          text-decoration: none;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+        .generate-button:hover {
+          background-color: #005f73;
+        }
+    </style>
+</head>
+<body>
+    <div id="passwords">
+      <p class="password strength-weak">Weak: <%= @passwords[:weak] %></p>
+      <p class="password strength-medium">Medium: <%= @passwords[:medium] %></p>
+      <p class="password strength-strong">Strong: <%= @passwords[:strong] %></p>
+      <p class="password strength-very-strong">Very Strong: <%= @passwords[:very_strong] %></p>
+    </div>
+
+    <%= button_to "Generate Passwords", root_path, method: :get, class: "generate-button", remote: true %>
+</body>
+</html>
